@@ -1,0 +1,71 @@
+<%- include("./partial/header.ejs") %>
+
+
+<div class="container-fluid m-0 p-0 city-bg--<%= game.moment %> screen">
+    <div class="container pt-3">
+        <div class="row mb-3 p-2">
+            <div class="card bg-garouille">
+                <div class="card-body">
+                    <div class="col-12 text-center">
+                        <h1 class="title-fantasy text-white">Village de Mont Taiton</h1>
+                    </div>
+                    <div class="col-12 text-center">
+                        <h2 class="fs-4 text-white">Jour #<%= game.day %> - joueurs restants <%= playersRemaining.length %> /<%= players.length %></h2>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <% for( const player of players ) { %>
+            <div class="col-lg-3 p-2">
+                <% if( player.alive ) { %>
+                <div  class="card animate__animated animate__headShake wooden-bg" >
+                    <% } else { %>
+                    <div class="card animate__animated animate__heartBeat bg-danger ligth tomb-bg" >
+                        <% } %>
+                        <div class="d-flex">
+                            <div class="p-2">
+                                <div src="" alt="" class="avatar-img" style="background-image: url('/public/uploads/<%= player.image %>')"></div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-white title-fantasy fs-3 w-100 text-center"><%= player.playerName%></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/public/asset/js/socket.io.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const socket = io();
+        socket.on('update', function(data) {
+            fetch("http://localhost:8007/play")
+                .then( response  => {
+                    if( !response.ok ){
+                        location.reload();
+                        return;
+                    }
+                    return response.text();
+                })
+                .then( html => {
+                    console.log(html);
+                    document.documentElement.innerHTML = html;
+                })
+        });
+        socket.on('stop-game', function(data) {
+            window.location = "http://localhost:8007/";
+        });
+
+    });
+</script>
+
+<%- include("./partial/footer.ejs") %>

@@ -1,0 +1,77 @@
+<%- include("./partial/header.ejs") %>
+
+
+<div class="container-fluid m-0 p-0 city-bg--day screen">
+    <div class="container p-5">
+        <div class="row p-0 m-0">
+            <div class="col-md-12 text-center">
+                <div class="card bg-dark">
+                    <div class="card-body text-white p-5">
+                        <h1 class="title-fantasy very-big-text text-danger animate__animated animate__infinite animate__pulse	infinite">Le loup Garou de chez Jimi</h1>
+                        <h2 class="">Bienvenus habitants de Songe Paté!</h2>
+                        <div class="row mt-5">
+                            <div class="col-12 text-center">
+                                <h3>Pour rejoindre l'aventure, scannez le QR Code</h3>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center mt-3">
+                                <div class="card p-3">
+                                    <div id="qrcode"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12 fs-5 mb-1">
+                                Ils ont rejoint l'aventure:
+                            </div>
+                            <div class="col-12 d-flex justify-content-center gap-3" id="player-list">
+                                <% for( const player of players ) {%>
+                                    <span class="badge rounded-pill bg-danger"><%=player.playerName %></span>
+                                <% } %>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script src="/public/asset/js/qrcode.min.js"></script>
+<script src="/public/asset/js/qrcode_generator.js"></script>
+
+
+<script src="/public/asset/js/socket.io.min.js"></script>
+<script>
+    const playerListElement = document.getElementById('player-list');
+    document.addEventListener("DOMContentLoaded", function() {
+        const socket = io();
+        socket.on('start-game', function(data) {
+           window.location = '/play';
+        });
+
+        socket.on('player-update', function(data) {
+            fetch( "http://localhost:8007/api/players" )
+                .then( response => response.json() )
+                .then( data => {
+
+                    const elements = data.map( player => {
+                        return `<span class="badge rounded-pill bg-danger">${player.playerName}</span>`
+                    });
+
+                    playerListElement.innerHTML = elements.join('');
+                })
+        });
+    });
+
+
+
+</script>
+
+
+<%- include("./partial/footer.ejs") %>

@@ -1,0 +1,45 @@
+<%- include("./partial/header.ejs") %>
+
+<div class="container-fluid p-0 m-0 bg-player screen bg-wherewolf">
+    <div class="obscur">
+    <div class="container">
+
+        <div class="row pt-5">
+            <div class="col-12 mb-5">
+                <h1 class="text-center text-white title-fantasy very-big-text animate__animated animate__heartBeat">Rejoindre l'aventure</h1>
+            </div>
+
+            <div class="col-12 mt-5 pt-5">
+                <form action="/create" enctype="multipart/form-data" method="post">
+
+                    <input type="file" class="form-control-file" name="uploadFile" style="display: none" required id="upload-input">
+
+                    <div class="d-grid" >
+                        <button type="button" class="btn btn-danger w-100" id="upload-btn">📷 Uploader ma photo</button>
+                        <button type="button" class="btn btn-success" style="display: none" id="valid-btn">✔️ Photo chargée!</button>
+                    </div>
+
+
+
+
+                    <div class="form-group mt-2">
+                        <input type="text" name="playerName" class="form-control" placeholder="Saisis ton nom" required id="name-input">
+                    </div>
+
+                    <div class="d-grid mt-5 pt-5" >
+                        <button type="submit" class="btn bg-dark w-100 text-white" style="display: none" id="submit-input">C'est parti!</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+</div>
+
+<script src="/public/asset/js/create.js"></script>
+
+<%- include("./partial/footer.ejs") %>

@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-6">
+        <h3>
+            Jour #<%= game.day %>
+        </h3>
+        <% if(game.moment === 'night'){ %>
+            <span class="badge bg-dark ">C'est la nuit 🌙 ️</span>
+
+        <% } else { %>
+            <span class="badge bg-warning ">C'est le jour ☀️</span>
+        <% } %>
+    </div>
+
+    <div class="col-6 d-grid gap-2">
+        <a href="/remote/day-remove" class="btn btn-info"> Jour précédent </a>
+        <% if(game.moment === 'night'){ %>
+            <a href="/remote/day-night/toggle" class="btn btn-warning"> ☀️ Jour </a>
+        <% } else { %>
+            <a href="/remote/day-night/toggle" class="btn btn-dark"> 🌙 Nuit </a>
+        <% } %>
+        <a href="/remote/day-add" class="btn btn-info"> Jour suivant </a>
+    </div>
+</div>
+
+
+<hr>
+
+<div class="d-grid gap-3">
+    <a href="/remote/kill-all" class="btn btn-danger">💀 Tuer tout le monde</a>
+    <a href="/remote/resurect-all" class="btn btn-success">😇 Ressusciter tout le monde</a>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-12 d-grid">
+        <a href="/remote/restart-game" class="btn btn-primary">🐺 Nouvelle partie</a>
+    </div>
+
+    <div class="col-6 d-grid mt-4">
+        <a href="/remote/stop-game" class="btn btn-danger">Ecran d'accueil</a>
+    </div>
+    <div class="col-6 d-grid mt-4">
+        <a href="/remote/start-game" class="btn btn-success">Ecran de jeu</a>
+    </div>
+
+</div>

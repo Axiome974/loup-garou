@@ -1,0 +1,32 @@
+<%- include("./partial/header.ejs") %>
+
+<div class="container-fluid p-0 m-0 bg-player screen bg-wherewolf">
+    <div class="obscur">
+    <div class="container">
+
+        <div class="row pt-5">
+            <div class="col-12 mb-5">
+                <h1 class="text-center text-white title-fantasy very-big-text animate__animated animate__heartBeat">
+                    Bienvenue à Mont Taiton, <%= playerName %>
+                </h1>
+            </div>
+
+            <div class="col-12 mt-5">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <p class="fs-5 text-white text-center"><%= spitch %></p>
+                        <a href="/create" class="btn btn-danger text-white">Nouveau joueur</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    </div>
+
+</div>
+
+<script src="/public/asset/js/create.js"></script>
+
+<%- include("./partial/footer.ejs") %>
